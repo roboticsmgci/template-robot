@@ -7,18 +7,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
 
-	private CANSparkMax m_arm = new CANSparkMax(5, MotorType.kBrushless);
+    private CANSparkMax m_arm = new CANSparkMax(5, MotorType.kBrushless);
 
-	public Arm() {
-		m_arm.restoreFactoryDefaults();
-		setName("Arm");
-	}
+    public Arm() {
+        m_arm.restoreFactoryDefaults();
+        setName("Arm");
+    }
 
-	public void rotate(double speed) {
-		m_arm.set(speed);
-	}
+    public void rotate(double speed) {
+        m_arm.set(speed);
+    }
 
-	public void stop() {
-		m_arm.set(0);
-	}
+    public void stop() {
+        m_arm.set(0);
+    }
 }

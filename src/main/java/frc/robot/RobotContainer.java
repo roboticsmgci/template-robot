@@ -77,7 +77,8 @@ public class RobotContainer {
                                     * (!(m_stick2.getRawButton(1) || m_stick2.getRawButton(1)) ? 1 : 0)
                                     + (m_stick1.getY() + m_stick2.getY()) / 2
                                             * ((m_stick2.getRawButton(1) || m_stick2.getRawButton(1)) ? 1 : 0))
-                                    * (Math.round((-m_stick1.getThrottle() + 1) / 2) == 0 ? 1 : 0)
+                                    * (Math.round((-m_stick1.getThrottle() + 1)
+                                            / 2) == 0 ? 1 : 0)
                                     // tank
                                     +
                             // arcade
@@ -87,11 +88,17 @@ public class RobotContainer {
                                                             * (!m_stick2.getRawButton(1) ? 1 : 0)))
                                             + (m_stick2.getZ()
                                                     * 0.5
-                                                    * (!m_stick2.getRawButton(1) ? 1 : 0)
+                                                    * (!m_stick2.getRawButton(
+                                                            1) ? 1
+                                                                    : 0)
                                                     + m_stick2.getZ()
                                                             * 0.5
-                                                            * (m_stick2.getRawButton(2) ? 1 : 0)))
-                                            * (int) Math.round((-m_stick1.getThrottle() + 1) / 2)
+                                                            * (m_stick2.getRawButton(
+                                                                    2) ? 1
+                                                                            : 0)))
+                                            * (int) Math.round((-m_stick1
+                                                    .getThrottle()
+                                                    + 1) / 2)
                             // arcade
                             ) * ((-m_stick2.getThrottle() + 2) / 3));
                         },
@@ -99,24 +106,37 @@ public class RobotContainer {
                             return (-(
                             // tank
                             (m_stick1.getY()
-                                    * (!(m_stick2.getRawButton(1) || m_stick2.getRawButton(1)) ? 1 : 0)
+                                    * (!(m_stick2.getRawButton(1)
+                                            || m_stick2.getRawButton(1)) ? 1 : 0)
                                     + (m_stick1.getY() + m_stick2.getY()) / 2
-                                            * (m_stick2.getRawButton(1) || m_stick2.getRawButton(1) ? 1 : 0))
-                                    * (Math.round((-m_stick1.getThrottle() + 1) / 2) == 0 ? 1 : 0)
+                                            * (m_stick2.getRawButton(1)
+                                                    || m_stick2.getRawButton(
+                                                            1) ? 1
+                                                                    : 0))
+                                    * (Math.round((-m_stick1.getThrottle() + 1)
+                                            / 2) == 0 ? 1 : 0)
                                     // tank
                                     +
                             // arcade
                                     (m_stick2.getY()
                                             * (1 - Math.abs(
                                                     m_stick2.getZ()
-                                                            * (!m_stick2.getRawButton(1) ? 1 : 0)))
+                                                            * (!m_stick2.getRawButton(
+                                                                    1) ? 1
+                                                                            : 0)))
                                             - (m_stick2.getZ()
                                                     * 0.5
-                                                    * (!m_stick2.getRawButton(1) ? 1 : 0)
+                                                    * (!m_stick2.getRawButton(
+                                                            1) ? 1
+                                                                    : 0)
                                                     + m_stick2.getZ()
                                                             * 0.5
-                                                            * (m_stick2.getRawButton(2) ? 1 : 0)))
-                                            * (int) Math.round((-m_stick1.getThrottle() + 1) / 2)
+                                                            * (m_stick2.getRawButton(
+                                                                    2) ? 1
+                                                                            : 0)))
+                                            * (int) Math.round((-m_stick1
+                                                    .getThrottle()
+                                                    + 1) / 2)
                             // arcade
                             ) * ((-m_stick2.getThrottle() + 2) / 3));
                         }));

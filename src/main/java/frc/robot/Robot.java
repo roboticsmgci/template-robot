@@ -11,65 +11,65 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
 
-	private Command m_autonomousCommand;
-	private RobotContainer m_container;
+    private Command m_autonomousCommand;
+    private RobotContainer m_container;
 
-	@Override
-	public void robotInit() {
-		// frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
-		// frc::CameraServer::GetInstance()->StartAutomaticCapture(1);
-		RobotController.setBrownoutVoltage(6);
-	}
+    @Override
+    public void robotInit() {
+        // frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
+        // frc::CameraServer::GetInstance()->StartAutomaticCapture(1);
+        RobotController.setBrownoutVoltage(6);
+    }
 
-	@Override
-	public void robotPeriodic() {
-		CommandScheduler.getInstance().run();
-	}
+    @Override
+    public void robotPeriodic() {
+        CommandScheduler.getInstance().run();
+    }
 
-	@Override
-	public void disabledInit() {
-	}
+    @Override
+    public void disabledInit() {
+    }
 
-	@Override
-	public void disabledPeriodic() {
-	}
+    @Override
+    public void disabledPeriodic() {
+    }
 
-	@Override
-	public void autonomousInit() {
+    @Override
+    public void autonomousInit() {
 
-		// m_container.m_drivetrain.setIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+        // m_container.m_drivetrain.setIdleMode(rev::CANSparkMax::IdleMode::kBrake);
 
-		m_autonomousCommand = m_container.getAutonomousCommand();
+        m_autonomousCommand = m_container.getAutonomousCommand();
 
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.schedule();
-		}
+        if (m_autonomousCommand != null) {
+            m_autonomousCommand.schedule();
+        }
 
-	}
+    }
 
-	@Override
-	public void autonomousPeriodic() {
-	}
+    @Override
+    public void autonomousPeriodic() {
+    }
 
-	@Override
-	public void teleopInit() {
+    @Override
+    public void teleopInit() {
 
-		// m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+        // m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
 
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
-			m_autonomousCommand = null;
-		}
+        if (m_autonomousCommand != null) {
+            m_autonomousCommand.cancel();
+            m_autonomousCommand = null;
+        }
 
-	}
+    }
 
-	@Override
-	public void teleopPeriodic() {
-	}
+    @Override
+    public void teleopPeriodic() {
+    }
 
-	@Override
-	public void testPeriodic() {
-	}
+    @Override
+    public void testPeriodic() {
+    }
 }
 
 /*
