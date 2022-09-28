@@ -1,93 +1,81 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 package frc.robot;
 
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
-
 public class Robot extends TimedRobot {
 
-    private Command autoCommand;
-    private RobotContainer robotContainer;
+	private Command m_autonomousCommand;
+	private RobotContainer m_container;
 
+	@Override
+	public void robotInit() {
+		// frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
+		// frc::CameraServer::GetInstance()->StartAutomaticCapture(1);
+		RobotController.setBrownoutVoltage(6);
+	}
 
-    @Override
-    public void robotInit() {
+	@Override
+	public void robotPeriodic() {
+		CommandScheduler.getInstance().run();
+	}
 
-        // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-        // autonomous chooser on the dashboard.
-        robotContainer = new RobotContainer();
+	@Override
+	public void disabledInit() {
+	}
 
-    }
+	@Override
+	public void disabledPeriodic() {
+	}
 
-    @Override
-    public void robotPeriodic() {
+	@Override
+	public void autonomousInit() {
 
-        // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-        // commands, running already-scheduled commands, removing finished or interrupted commands,
-        // and running subsystem periodic() methods.  This must be called from the robot's periodic
-        // block in order for anything in the Command-based framework to work.
-        CommandScheduler.getInstance().run();
+		// m_container.m_drivetrain.setIdleMode(rev::CANSparkMax::IdleMode::kBrake);
 
-    }
+		m_autonomousCommand = m_container.getAutonomousCommand();
 
+		if (m_autonomousCommand != null) {
+			m_autonomousCommand.schedule();
+		}
 
-    @Override
-    public void disabledInit() {}
+	}
 
-    @Override
-    public void disabledPeriodic() {}
+	@Override
+	public void autonomousPeriodic() {
+	}
 
-    
-    @Override
-    public void autonomousInit() {
+	@Override
+	public void teleopInit() {
 
-        autoCommand = robotContainer.getAutonomousCommand();
+		// m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
 
-        if (autoCommand != null) {
-            autoCommand.schedule();
-        }
+		if (m_autonomousCommand != null) {
+			m_autonomousCommand.cancel();
+			m_autonomousCommand = null;
+		}
 
-    }
-    
-    @Override
-    public void autonomousPeriodic() {}
+	}
 
+	@Override
+	public void teleopPeriodic() {
+	}
 
-    @Override
-    public void teleopInit() {
-
-        // This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autoCommand != null) {
-            autoCommand.cancel();
-        }
-
-    }
-
-    @Override
-    public void teleopPeriodic() {}
-
-
-    @Override
-    public void testInit() {
-
-        // Cancels all running commands at the start of test mode.
-        CommandScheduler.getInstance().cancelAll();
-
-    }
-
-  
-    @Override
-    public void testPeriodic() {}
-
-
-    @Override
-    public void simulationInit() {}
-
-    @Override
-    public void simulationPeriodic() {}
-
+	@Override
+	public void testPeriodic() {
+	}
 }
+
+/*
+ * #ifndef RUNNING_FRC_TESTS
+ * int main() {
+ * return frc::StartRobot<Robot>();
+ * }
+ * #endif
+ */
